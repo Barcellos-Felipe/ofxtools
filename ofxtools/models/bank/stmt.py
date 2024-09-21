@@ -191,7 +191,7 @@ class STMTTRN(Aggregate, Origcurrency):
     correctaction = OneOf("REPLACE", "DELETE")
     srvrtid = String(10)
     checknum = String(12)
-    refnum = String(32)
+    refnum = String(150)
     sic = Integer()
     payeeid = String(12)
     name = NagString(32)
