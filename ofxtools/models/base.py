@@ -284,7 +284,10 @@ class Aggregate(list):
             # Parse attribute value
             if attrname in cls.unsupported:
                 value: Optional[Union[str, Aggregate]] = None
-            elif elem.text or len(elem) == 0: # https://github.com/csingley/ofxtools/issues/188
+            elif len(elem) == 0 and not elem.text: # https://github.com/csingley/ofxtools/issues/188
+                elem.text = ' '
+                value = elem.text
+            elif elem.text:
                 # Element - extract as string; value will be type-converted upon
                 # instance initialization by ``ofxtools.Types.Element.__set__()``.
                 value = elem.text
