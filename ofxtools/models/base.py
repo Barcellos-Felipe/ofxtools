@@ -58,6 +58,10 @@ class OFXSpecError(OFXAggregateError):
     """Violation of the OFX specification."""
 
 
+class OFXSpecWarning(UserWarning):
+    """Violation of the OFX specification."""
+
+
 class OFXAggregateWarning(UserWarning):
     """Base class for warnings in this module."""
 
@@ -279,7 +283,7 @@ class Aggregate(list):
                     f"{attrname.upper()} should occur before "
                     f"{spec[prev_index].upper()}, not after it."
                 )
-                raise OFXSpecError(msg)
+                warnings.warn(msg, category=OFXSpecWarning)
 
             # Parse attribute value
             if attrname in cls.unsupported:
